@@ -8,16 +8,17 @@ import Home from "./Pages/Home/Home";
 import Logo from "./Pages/Dashboard/Logo";
 import History from "./Pages/History/History";
 import Chat from "./Pages/chat/chatLayout";
-import Landing_page from "./Landing_page";
+
 
 function App() {
 
   return (
     <>
     <Routes> 
+    
     <Route path="/dashboard" element={<Dashboard/>}/>
     <Route path="/Logo" element={<Logo/>}/>
-    <Route path="/login" element={<Login/>}/>
+    <Route path="/" element={<Login/>}/>
     <Route path="/classSelection" element={<ClassSelection/>}/>
     <Route path="/subtopics" element={<Home/>}/>
     <Route path="/signup" element={<Signup/>}/>
