@@ -1,14 +1,19 @@
 import { Routes, Route } from "react-router-dom";
 import './index.css'
-import Dashboard from "./dashboard";
+import ClassSelection from "./classSelection";
+import Login from "./Pages/Authentication/Login";
+import Signup from "./Pages/Authentication/Signup";
+import Dashboard from "./Pages/Dashboard/page2";
 
 function App() {
 
   return (
     <>
-    <Dashboard/>
     <Routes> 
-    <Route path="/" element={<Dashboard/>}/>
+      <Route path="/dashboard" element={<Dashboard/>}/>
+    <Route path="/" element={<Login/>}/>
+    <Route path="/classSelection" element={<ClassSelection/>}/>
+    <Route path="/signup" element={<Signup/>}/>
     </Routes>
     </>
   )
