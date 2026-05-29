@@ -138,7 +138,7 @@ const Login = () => {
         </button>
       </div>
       <div className="flex flex-row gap-1 cursor-pointer ">
-        <p className="text-stone-400">New to EduLearn? </p>
+        <p className="text-stone-400">New to synaptiQ? </p>
         <p
           className="text-[#10B981] active:text-lg transition duration-100"
           onClick={() => navigate("/signup")}
