@@ -4,7 +4,7 @@ import ClassSelection from "./classSelection";
 import Login from "./Pages/Authentication/Login";
 import Signup from "./Pages/Authentication/Signup";
 import Dashboard from "./Pages/Dashboard/page2";
-import Home from "./Pages/Home/home";
+import Home from "./Pages/Home/Home";
 import Logo from "./Pages/Dashboard/Logo";
 import History from "./Pages/History/History";
 import Chat from "./Pages/chat/chatLayout";
