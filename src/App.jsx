@@ -15,6 +15,7 @@ function App() {
   return (
     <>
     <Routes> 
+    <Route path="/" element={<Landing_page/>}/>
     <Route path="/dashboard" element={<Dashboard/>}/>
     <Route path="/Logo" element={<Logo/>}/>
     <Route path="/login" element={<Login/>}/>
