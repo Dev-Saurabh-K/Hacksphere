@@ -8,7 +8,7 @@ import Home from "./Pages/Home/Home";
 import Logo from "./Pages/Dashboard/Logo";
 import History from "./Pages/History/History";
 import Chat from "./Pages/chat/chatLayout";
-
+import StudyNotes from "./Pages/StudyNotes/studyNotes";
 
 function App() {
 
@@ -17,13 +17,14 @@ function App() {
     <Routes> 
     
     <Route path="/dashboard" element={<Dashboard/>}/>
-    <Route path="/Logo" element={<Logo/>}/>
+    <Route path="/Logo" element={<Logo/>}/>   
     <Route path="/" element={<Login/>}/>
     <Route path="/classSelection" element={<ClassSelection/>}/>
     <Route path="/subtopics" element={<Home/>}/>
     <Route path="/signup" element={<Signup/>}/>
     <Route path="/history" element={<History/>}/>
     <Route path="/chat" element={<Chat/>}/>
+    <Route path="/study-notes" element={<StudyNotes/>}/>
     </Routes>
     </>
   )
