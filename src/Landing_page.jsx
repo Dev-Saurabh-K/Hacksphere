@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-/* ─── GLOBAL STYLES injected once ─── */
 const GLOBAL_CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;600&display=swap');
 

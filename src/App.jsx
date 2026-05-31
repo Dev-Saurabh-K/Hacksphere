@@ -15,16 +15,17 @@ function App() {
   return (
     <>
     <Routes> 
-    
+
+    <Route path="/" element={<Landing_page/>}/>
+
     <Route path="/dashboard" element={<Dashboard/>}/>
     <Route path="/Logo" element={<Logo/>}/>   
-    <Route path="/" element={<Login/>}/>
+    <Route path="/login" element={<Login/>}/>
     <Route path="/classSelection" element={<ClassSelection/>}/>
     <Route path="/subtopics" element={<Home/>}/>
     <Route path="/signup" element={<Signup/>}/>
     <Route path="/history" element={<History/>}/>
     <Route path="/chat" element={<Chat/>}/>
-    <Route path="/study-notes" element={<StudyNotes/>}/>
     </Routes>
     </>
   )
