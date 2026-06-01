@@ -8,7 +8,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const classes = [5, 6, 7, 8, 9, 10, 11, 12];
+  const classes = ['5', '6', '7', '8', '9', '10', '11', '12'];
 
   const handleClick = async () => {
   setLoading(true);
@@ -18,15 +18,15 @@ export default function Dashboard() {
   try {
     const response = await axios.put(
       "http://localhost:8000/api/user/data",
-      null, 
-      {
-        params: {
-          user_class: selectedClass, 
+       {
+          studying_at: selectedClass, 
         },
+        {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
+      
     );
 
     console.log("Saving chosen grade success:", response.data);

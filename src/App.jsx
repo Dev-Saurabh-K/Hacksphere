@@ -9,6 +9,7 @@ import Logo from "./Pages/Dashboard/Logo";
 import History from "./Pages/History/History";
 import Chat from "./Pages/chat/chatLayout";
 import StudyNotes from "./Pages/StudyNotes/studyNotes";
+import Landing_page from "./Landing_page";
 
 function App() {
 
