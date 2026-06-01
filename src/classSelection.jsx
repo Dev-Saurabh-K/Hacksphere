@@ -4,40 +4,42 @@ import axios from "axios";
 import Logo from "./logo";
 
 export default function Dashboard() {
-  const [selectedClass, setSelectedClass] = useState(5);
+  const [selectedClass, setSelectedClass] = useState("1");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const classes = ['5', '6', '7', '8', '9', '10', '11', '12'];
+  const classes = ["5", "6", "7", "8", "9", "10", "11", "12"];
 
   const handleClick = async () => {
-  setLoading(true);
+    setLoading(true);
 
-  const token = localStorage.getItem("access_token") || "YOUR_ACCESS_TOKEN_HERE";
-
-  try {
-    const response = await axios.put(
-      "http://localhost:8000/api/user/data",
-       {
-          studying_at: selectedClass, 
+    const token =
+      localStorage.getItem("access_token") || "YOUR_ACCESS_TOKEN_HERE";
+    // console.log(token)
+    try {
+      const response = await axios.put(
+        "http://localhost:8000/api/user/data",
+        {
+          studying_at: selectedClass,
         },
         {
-        headers: {
-          Authorization: `Bearer ${token}`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      }
-      
-    );
-
-    console.log("Saving chosen grade success:", response.data);
-    navigate("/dashboard");
-  } catch (error) {
-    console.error("Failed to save user data:", error.response?.data || error.message);
-    alert("Something went wrong saving your grade. Please try again.");
-  } finally {
-    setLoading(false);
-  }
-};
+      );
+      console.log("Saving chosen grade success:", response.data);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(
+        "Failed to save user data:",
+        error.response?.data || error.message,
+      );
+      alert("Something went wrong saving your grade. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen w-full bg-[#000000] text-stone-100 flex flex-col items-center justify-center font-sans px-4">
@@ -54,7 +56,6 @@ export default function Dashboard() {
           </p>
         </div>
 
-       
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 mt-6">
           {classes.map((grade) => {
             const isSelected = selectedClass === grade;
@@ -76,7 +77,6 @@ export default function Dashboard() {
           })}
         </div>
 
-        
         <div className="mt-8">
           <button
             onClick={handleClick}
