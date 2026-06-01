@@ -530,6 +530,7 @@ function Footer() {
 /* ─────────── ROOT APP ─────────── */
 export default function SynaptiQ() {
   useEffect(() => { injectGlobalStyles(); }, []);
+  localStorage.setItem("reloaded","no");
   return (
     <div style={{ background:"var(--paper)", color:"var(--ink)", overflowX:"hidden", minHeight:"100vh" }}>
       <Nav />

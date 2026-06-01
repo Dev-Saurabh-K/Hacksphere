@@ -1,16 +1,29 @@
 import { useState } from "react";
 import Logo from "./Logo";
 import Alert from '@mui/material/Alert';
+import {useEffect} from "react"
 
 
 import { useNavigate } from "react-router-dom";
 const Login = () => {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(()=>{
+
+    const reloaded = localStorage.getItem("reloaded")
+    if(reloaded=="no"){
+      localStorage.setItem("reloaded","yes")
+      window.location.reload()
+    }
+    
+  },[])
+  
 
   const handleLogin = async () => {
     setErrorMessage("");
