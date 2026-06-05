@@ -22,10 +22,11 @@ const Signup = () => {
     }
 
     setIsLoading(true);
+    const URL = `${import.meta.env.VITE_API_URL}/register`;
 
     try {
      
-      const response = await fetch('http://localhost:8000/register', {
+      const response = await fetch(URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

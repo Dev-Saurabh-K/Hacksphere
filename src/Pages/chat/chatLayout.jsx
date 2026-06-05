@@ -21,9 +21,11 @@ export default function ChatLayout() {
         scrollToBottom();
     }, [chats]);
 
+    const RUrl = `${import.meta.env.VITE_API_URL}/api/chat/retrive`;
+
     const fetchChats = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/chat/retrive", {
+            const response = await fetch(RUrl, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" }
             });
@@ -49,8 +51,10 @@ export default function ChatLayout() {
         const currentChat = input;
         setInput('');
 
+        const SUrl = `${import.meta.env.VITE_API_URL}/api/chat/send`;
+
         try {
-            const response = await fetch("http://localhost:8000/api/chat/send", {
+            const response = await fetch(SUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: currentChat, user_id: '123' })

@@ -15,10 +15,11 @@ export default function Dashboard() {
 
     const token =
       localStorage.getItem("access_token") || "YOUR_ACCESS_TOKEN_HERE";
+      const URL = `${import.meta.env.VITE_API_URL}/api/user/data`;
     // console.log(token)
     try {
       const response = await axios.put(
-        "http://localhost:8000/api/user/data",
+        URL,
         {
           studying_at: selectedClass,
         },

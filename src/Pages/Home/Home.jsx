@@ -19,9 +19,10 @@ export default function Home() {
         setIsLoading(false);
         return;
       }
-
+        const URL = `${import.meta.env.VITE_API_URL}/api/get/topic?limit=100`;
       try {
-        const response = await fetch('http://localhost:8000/api/get/topic', {
+        const response = await fetch(
+          URL , {
           method: 'GET',
           headers: {
             'Accept': 'application/json',

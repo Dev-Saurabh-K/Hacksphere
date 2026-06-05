@@ -24,11 +24,6 @@ const CenterSec = () => {
       icon: FileText,
     },
     {
-      id: "image",
-      title: "Upload Image",
-      icon: Image,
-    },
-    {
       id: "manual",
       title: "Add Topics Manually",
       icon: Keyboard,
@@ -62,7 +57,7 @@ const CenterSec = () => {
   const handleGenerate = async () => {
     try {
       setLoading(true);
-
+     const URL = `${import.meta.env.VITE_API_URL}/api/generate/syllabus`;
       // ==========================
       // Upload PDF Flow
       // ==========================
@@ -76,7 +71,7 @@ const CenterSec = () => {
         formData.append("file", selectedFile);
 
         const response = await fetch(
-          "http://localhost:8000/api/generate/syllabus",
+          URL,
           {
             method: "POST",
             body: formData,
@@ -98,41 +93,8 @@ const CenterSec = () => {
         });
       }
 
-      // ==========================
-      // Upload Image Flow
-      // ==========================
-      else if (selectedId === "image") {
-        if (!selectedImage) {
-          alert("Please select an image first!");
-          return;
-        }
-
-        const formData = new FormData();
-        // Uses 'file' key matching the multpart/form-data requirement shown in Swagger
-        formData.append("file", selectedImage); 
-
-        const response = await fetch(
-          "http://localhost:8000/api/generate/syllabus",
-          {
-            method: "POST",
-            body: formData,
-            headers: {
-              Authorization: `Bearer ${ACCESS_TOKEN}`,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`Server responded with status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Plan Generated from Image:", data);
-
-        navigate("/subtopics", {
-          state: { plan: data },
-        });
-      }
+     
+       
 
       // ==========================
       // Manual Topic Flow
@@ -142,9 +104,10 @@ const CenterSec = () => {
           alert("Please enter topic details first!");
           return;
         }
+        const SURL = `${import.meta.env.VITE_API_URL}/api/generate/addtopic`;
 
         const response = await fetch(
-          "http://localhost:8000/api/generate/addtopic",
+          SURL,
           {
             method: "POST",
             headers: {
@@ -194,7 +157,7 @@ const CenterSec = () => {
 
       <div className="flex flex-col items-center justify-center py-12 px-4 max-w-5xl mx-auto font-sans">
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-extrabold tracking-tight text-zinc-100 sm:text-5xl">
+          <h2 className="text-4xl font-extrabold tracking-tight text-zinc-100 sm:text-4xl">
             Ask AI
           </h2>
           <p className="mt-2 text-sm text-zinc-400 max-w-sm mx-auto">
@@ -203,7 +166,8 @@ const CenterSec = () => {
           </p>
         </div>
 
-        <div className="w-full bg-[#131313] border border-zinc-800/60 flex flex-col md:flex-row items-stretch justify-center gap-4 p-5 rounded-2xl shadow-xl">
+        <div className="w-full bg-[#131313] border border-zinc-800/60 flex flex-col md:flex-row 
+        items-stretch justify-center gap-4 p-5 rounded-2xl shadow-xl">
           {content.map((item) => (
             <div key={item.id} className="flex-1 flex">
               <FeatureCard
@@ -242,30 +206,6 @@ const CenterSec = () => {
             </div>
           )}
 
-          {/* Image Upload Field */}
-          {selectedId === "image" && (
-            <div
-              onClick={handleImageContainerClick}
-              className="w-full p-8 border border-dashed border-zinc-800 bg-[#161618]/50 rounded-2xl flex flex-col items-center justify-center gap-3 group hover:border-emerald-600/50 transition-colors cursor-pointer"
-            >
-              <input
-                type="file"
-                ref={imageInputRef}
-                onChange={handleImageChange}
-                accept="image/*"
-                className="hidden"
-              />
-              <UploadCloud className="w-10 h-10 text-zinc-500 group-hover:text-emerald-400 transition-colors" />
-              <p className="text-sm text-zinc-300 font-medium">
-                {selectedImage
-                  ? `Selected: ${selectedImage.name}`
-                  : "Click to upload or drag & drop your image here"}
-              </p>
-              <p className="text-xs text-zinc-500">
-                PNG, JPG, JPEG up to 10MB
-              </p>
-            </div>
-          )}
 
           {/* Manual Input Field */}
           {selectedId === "manual" && (
@@ -284,7 +224,7 @@ const CenterSec = () => {
               loading ||
               !selectedId ||
               (selectedId === "upload" && !selectedFile) ||
-              (selectedId === "image" && !selectedImage) ||
+             
               (selectedId === "manual" && !textInput.trim())
             }
             onClick={handleGenerate}

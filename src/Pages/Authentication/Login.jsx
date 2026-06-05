@@ -35,14 +35,17 @@ const Login = () => {
 
     setIsLoading(true);
 
+    const URL = `${import.meta.env.VITE_API_URL}/login`;
+
     try {
      
       const formData = new URLSearchParams();
       formData.append("username", email); 
       formData.append("password", password);
-
+    
+      console.log("API URL:", URL);
    
-      const response = await fetch("http://localhost:8000/login", {
+     const response = await fetch(URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -60,7 +63,7 @@ const Login = () => {
         console.log("Login successful! Token saved.");
         // alert("Success! You are now logged in.");
 
-        navigate("/classSelection")
+        navigate("/dashboard")
       } else {
        
         setErrorMessage(data.detail || "Login failed. Please try again.");

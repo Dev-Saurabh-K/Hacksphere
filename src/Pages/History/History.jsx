@@ -38,9 +38,9 @@ export default function HistoryPage() {
         if (!token) {
           throw new Error("Authentication token missing. Please log in.");
         }
-
+        const URL = `${import.meta.env.VITE_API_URL}/api/get/history?limit=${limit}`;
         const response = await fetch(
-          `http://localhost:8000/api/get/history?limit=${limit}`,
+           URL,
           {
             method: 'GET',
             headers: {
