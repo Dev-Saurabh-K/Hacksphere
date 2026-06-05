@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import {Link} from "react-router-dom";
+
+/* ─── GLOBAL STYLES injected once ─── */
 const GLOBAL_CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;600&display=swap');
 
@@ -63,7 +65,6 @@ const px = (obj) =>
 /* ─────────── SUB-COMPONENTS ─────────── */
 
 function Nav() {
-  
   const s = {
     nav: {
       display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -171,7 +172,7 @@ function KnowledgeGraphSVG() {
 
 function Hero() {
   const [ctaHov, setCtaHov] = useState(false);
-  const navigate = useNavigate();
+  
   return (
     <section style={{ display:"grid", gridTemplateColumns:"1fr 1fr", minHeight:"88vh", borderBottom:"var(--border)" }}>
       {/* left */}
@@ -197,21 +198,19 @@ function Hero() {
             Drop your syllabus. SynaptiQ reads it, builds your interactive notes, quizzes you like a professor
             who actually wants you to pass — and tracks every gap in your knowledge automatically.
           </p>
-<button
-      className="fade-up delay-3"
-      onMouseEnter={() => setCtaHov(true)}
-      onMouseLeave={() => setCtaHov(false)}
-      onClick={() => navigate('/login')}
-      style={{ 
-        display:"inline-flex", alignItems:"center", gap:10, background:"var(--ink)",
-        color:"var(--white)", fontFamily:"var(--display)", fontSize:12, fontWeight:700,
-        padding:"14px 28px", border:"none", cursor:"pointer", letterSpacing:"0.04em",
-        transform: ctaHov ? "translate(-3px,-3px)" : "translate(0,0)",
-        transition:"transform .15s", outline:"none" 
-      }}
-    >
-      Start learning free <span style={{ fontSize:18, lineHeight:1 }}>→</span>
-    </button>
+          <Link to="/login">
+          <button
+            className="fade-up delay-3"
+            onMouseEnter={() => setCtaHov(true)}
+            onMouseLeave={() => setCtaHov(false)}
+            style={{ display:"inline-flex", alignItems:"center", gap:10, background:"var(--ink)",
+              color:"var(--white)", fontFamily:"var(--display)", fontSize:12, fontWeight:700,
+              padding:"14px 28px", border:"none", cursor:"pointer", letterSpacing:"0.04em",
+              transform: ctaHov ? "translate(-3px,-3px)" : "translate(0,0)",
+              transition:"transform .15s", outline:"none" }}>
+            Start learning free <span style={{ fontSize:18, lineHeight:1 }}>→</span>
+          </button>
+          </Link>
         </div>
         <div className="fade-up delay-4" style={{ fontSize:11, color:"#888", fontFamily:"var(--mono)", position:"relative", zIndex:1 }}>
           No account needed · Works with any subject · Built by students
@@ -472,6 +471,7 @@ function CtaSection() {
           SynaptiQ turns passive rereading into active learning. Give it your syllabus once.
           It does the rest — notes, quizzes, gaps, all of it.
         </p>
+        <Link to="/login">
         <button
           onMouseEnter={() => setBtnHov(true)} onMouseLeave={() => setBtnHov(false)}
           style={{ background:"var(--white)", color:"var(--purple-m)", fontFamily:"var(--display)",
@@ -480,6 +480,7 @@ function CtaSection() {
             transform: btnHov ? "translate(-3px,-3px)" : "translate(0,0)", outline:"none" }}>
           Try SynaptiQ now →
         </button>
+        </Link>
       </div>
       {/* right info */}
       <div style={{ padding:"72px 56px", background:"var(--purple-l)", display:"flex",
@@ -529,8 +530,23 @@ function Footer() {
 
 /* ─────────── ROOT APP ─────────── */
 export default function SynaptiQ() {
-  useEffect(() => { injectGlobalStyles(); }, []);
-  localStorage.setItem("reloaded","no");
+  useEffect(() => {
+    // 1. Inject styles on mount
+    if (!document.getElementById("synaptiq-styles")) {
+      const s = document.createElement("style");
+      s.id = "synaptiq-styles";
+      s.textContent = GLOBAL_CSS;
+      document.head.appendChild(s);
+    }
+
+    // 2. Remove styles on unmount
+    return () => {
+      const styleTag = document.getElementById("synaptiq-styles");
+      if (styleTag) {
+        styleTag.remove();
+      }
+    };
+  }, []);
   return (
     <div style={{ background:"var(--paper)", color:"var(--ink)", overflowX:"hidden", minHeight:"100vh" }}>
       <Nav />

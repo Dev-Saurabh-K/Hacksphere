@@ -14,15 +14,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  useEffect(()=>{
-
-    const reloaded = localStorage.getItem("reloaded")
-    if(reloaded=="no"){
-      localStorage.setItem("reloaded","yes")
-      window.location.reload()
-    }
-    
-  },[])
+  
   
 
   const handleLogin = async () => {

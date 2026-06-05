@@ -232,8 +232,7 @@ export default function HistoryPage() {
               <p className="text-gray-400 font-medium text-sm">
                 Loading history...
               </p>
-
-            </div>
+            </div> 
 
           ) : error ? (
 

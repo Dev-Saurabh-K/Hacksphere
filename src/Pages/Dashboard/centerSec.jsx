@@ -87,7 +87,8 @@ const CenterSec = () => {
 
         const data = await response.json();
         console.log("Plan Generated:", data);
-
+          setLoading(false);
+          
         navigate("/subtopics", {
           state: { plan: data },
         });
