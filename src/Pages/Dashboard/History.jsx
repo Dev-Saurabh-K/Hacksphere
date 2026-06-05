@@ -12,8 +12,9 @@ const History = () => {
       setIsLoading(true);
       const access_token = localStorage.getItem("access_token");
       try {
+         const URL = `${import.meta.env.VITE_API_URL}/api/get/history?limit=${limit}`;
         const response = await axios.get(
-          `http://localhost:8000/api/get/history?limit=${limit}`,
+          URL,
           {
             headers: {
               Authorization: `Bearer ${access_token}`,
