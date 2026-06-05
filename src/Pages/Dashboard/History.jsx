@@ -30,7 +30,7 @@ const History = () => {
     };
 
     fetchHistory();
-  }, [limit]);
+  }, []);
 
   return (
     <div className="max-w-2xl mx-auto w-full text-stone-50 font-sans px-4 py-6">
